@@ -44,30 +44,15 @@
         color: #0000ff;
     }
 
-    .dropdown {
-        position: relative;
-    }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
 
     .desc {
         padding: 15px;
         text-align: center;
-        background: #45a049;
     }
 
     input[type=text],
+    [type=url],
     select {
         width: 90%;
         padding: 12px;
@@ -84,6 +69,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+        border-radius: 25px;
     }
 
     img:hover {
@@ -138,10 +124,11 @@
         border: 1px solid black;
         background-color: #f2f2f2;
         padding: 20px;
+        margin-top: 2rem;
     }
 
     .container1 {
-        border-radius: 5px;
+        border-radius: 50px;
         border: 2px solid gray;
         background-color: rgb(210, 243, 238);
         padding: 30px;
@@ -176,9 +163,70 @@
         clear: both;
     }
 
-    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
 
-    @media (max-width: 600px) {
+    li {
+        float: left;
+    }
+
+    li.right {
+        float: right;
+    }
+
+    li a,
+    .dropbtn {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover,
+    .dropdown:hover .dropbtn {
+        background-color: rgb(0, 0, 0);
+    }
+
+    li.dropdown {
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    @media screen and (max-width: 600px) {
+        li.right,
+        li {
+            float: none;
+        }
         .col-25,
         .col-75,
         input[type=submit] {
@@ -200,6 +248,8 @@
         }
         render() {
             return React.createElement("div", {},
+                React.createElement(NavComponent, {}),
+
                 React.createElement("div", { className: "container" },
                     React.createElement("H1", {}, "Welcome to World of Animals!"),
 
@@ -210,7 +260,7 @@
                     ),
                     React.createElement("div", { className: "row" },
                         React.createElement("div", { className: "col-25" }, React.createElement("LABEL", {}, "URL")),
-                        React.createElement("div", { className: "col-75" }, React.createElement("INPUT", { type: "text", id: "aUrl" })),
+                        React.createElement("div", { className: "col-75" }, React.createElement("INPUT", { type: "url", id: "aUrl" })),
                     ),
                     React.createElement("div", { className: "row" },
                         React.createElement("div", { className: "col-25" }, React.createElement("LABEL", {}, "Description")),
@@ -224,7 +274,9 @@
                     React.createElement(AnimalComponent, { animals: this.state.animals })
                 )
             )
+
         }
+
         addAnimal(event) {
             var aN = document.getElementById("aName").value;
             var aU = document.getElementById("aUrl").value;
@@ -263,13 +315,37 @@
                                         React.createElement("img", { src: item.url, alt: "Not Found", width: '300', height: '200' }),
                                         React.createElement("div", { className: "dropdown-content" },
                                             React.createElement("img", { src: item.url, alt: "Not Found", width: '600', height: '400' }),
-                                            React.createElement("div", { className: "desc" }, item.animalName),
+                                            //React.createElement("h3", { className: "desc" }, item.animalName),
                                         )
                                     )
                                 )
                             );
                         }),
                     )
+                )
+            )
+        }
+    }
+    class NavComponent extends React.Component {
+        render() {
+
+            return React.createElement("ul", {},
+                React.createElement("li", {},
+                    React.createElement("a", { href: "#home" }, "Home"),
+                ),
+                React.createElement("li", {},
+                    React.createElement("a", { href: "#news" }, "News"),
+                ),
+                React.createElement("li", { className: "dropdown" },
+                    React.createElement("a", { href: "javascript:void(0)", className: "dropbtn" }, "College"),
+                    React.createElement("div", { className: "dropdown-content" },
+                        React.createElement("a", { href: "#" }, "Animals"),
+                        React.createElement("a", { href: "#" }, "Studies"),
+                        React.createElement("a", { href: "#" }, "Projects"),
+                    )
+                ),
+                React.createElement("li", { className: "right" },
+                    React.createElement("a", { href: "#about" }, "About"),
                 )
             )
         }
