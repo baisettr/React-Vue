@@ -1,0 +1,58 @@
+<html>
+
+<body>
+    <div id="app">{{msg}}
+        <input v-model="msg">
+        <my-component msg="msg"></my-component>
+        <my-component v-bind:msg="msg"></my-component>
+        <ul>
+            <li v-for="p in ppl">{{p.fn}}</li>
+        </ul>
+        <ul>
+            <li v-for="p in ppl">
+                <person v-bind:person="p">
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        Vue.component('my-component', {
+            props: ['msg'],
+            //template: '<div>{{msg}}{{now}}{{fullMessage}}</div>',
+            template: '<div><span v-for="10"></span></div>',
+            data: function () {
+                return { now: new Date() };
+            },
+            computed: {
+                fullMessage: function () {
+                    const { now, msg } = this;
+                    return `${now} : ${msg}`;
+                    //return this.now + this.msg;
+                }
+            }
+            , methods: {
+
+                loadData: function () {
+
+                }
+            }
+        })
+        Vue.component('person', {
+            props: ['person'], template: '<span>{{person.fn}}{{fln}}</span>',
+            computed: {
+                fln: function () {
+                    return `${this.person.fn} : ${this.person.ln}`;
+                }
+            }
+            , methods: {
+                loadData: function () {
+                }
+            }
+        })
+        var app = new Vue({
+            el: '#app', data: { msg: 'Hello Gin!', ppl: [{ fn: "john", ln: "jj" }, { fn: "ann", ln: "ll" }] }
+        });
+    </script>
+</body>
+
+</html>

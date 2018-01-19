@@ -1,0 +1,43 @@
+<html>
+
+<body>
+    <div id="app">{{msg}}
+        <ul>
+            <li v-for="p in ppl">{{p.fn}}</li>
+        </ul>
+        <ul>
+            <li v-for="p in ppl">
+                <person v-bind:person="p" v-on:greet="updateMessage"></person>
+            </li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.component('person', {
+            props: ['person'], template: '<span>{{fullName}}<button v-on:click="handleGreet">Greet</button></span>',
+            computed: {
+                fullName: function () {
+                    return `${this.person.fn} : ${this.person.ln}`;
+                },
+                greet: function () {
+                    return `Hello from ${this.person.fn}`;
+                }
+            },
+            methods: {
+                handleGreet: function () {
+                    this.$emit('greet', this.greet);
+                }
+            }
+        })
+        var app = new Vue({
+            el: '#app', data: { msg: 'Hello Gin!', ppl: [{ fn: "john", ln: "jj" }, { fn: "ann", ln: "ll" }] },
+            methods: {
+                updateMessage: function (msg) {
+                    this.msg = msg;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

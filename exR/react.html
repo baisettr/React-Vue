@@ -1,0 +1,49 @@
+<div id="hello"></div>
+<style>
+    #hello {
+        font-family: sans-serif;
+    }
+
+    #hello table {
+        border-collapse: collapse
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.js"></script>
+<script>
+    class HelloComponet extends React.Component {
+        render() {
+            return React.createElement("table", {},
+                React.createElement("thead", {},
+                    React.createElement("tr", {},
+                        React.createElement("th", {}, "Name"),
+                        React.createElement("th", {}, "Age"),
+                        React.createElement("th", {}, "Skill")
+                    ),
+                ),
+                React.createElement("thead", {},
+                    React.createElement("tr", {},
+                        React.createElement("td", {}, "h1"),
+                        React.createElement("td", {}, "12"),
+                        React.createElement("td", {}, "node")
+                    ),
+                    React.createElement("tr", {},
+                        React.createElement("td", {}, "h2"),
+                        React.createElement("td", {}, "23"),
+                        React.createElement("td", {}, "react")
+                    ),
+                    React.createElement("tr", {},
+                        React.createElement("td", {}, "h3"),
+                        React.createElement("td", {}, "43"),
+                        React.createElement("td", {}, "vue")
+                    )
+                ),
+            )
+
+        }
+    }
+    ReactDOM.render(
+        React.createElement(HelloComponet, {}),
+        document.getElementById("hello")
+    );
+</script>
