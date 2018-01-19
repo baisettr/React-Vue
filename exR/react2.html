@@ -222,6 +222,30 @@
         display: block;
     }
 
+    .pagination {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        margin-left: 50%;
+        width: 60%;
+        display: inline-block;
+    }
+
+    .pagination a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .pagination a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    }
+
     @media screen and (max-width: 600px) {
         li.right,
         li {
@@ -272,7 +296,8 @@
                 ),
                 React.createElement("div", { className: "container1" },
                     React.createElement(AnimalComponent, { animals: this.state.animals })
-                )
+                ),
+                React.createElement(PaginationComponent, {}),
             )
 
         }
@@ -347,6 +372,21 @@
                 React.createElement("li", { className: "right" },
                     React.createElement("a", { href: "#about" }, "About"),
                 )
+            )
+        }
+    }
+    class PaginationComponent extends React.Component {
+        render() {
+
+            return React.createElement("div", { className: "pagination" },
+                React.createElement("a", { href: "#" }, "«"),
+                React.createElement("a", { href: "#" }, "1"),
+                React.createElement("a", { href: "#" }, "2"),
+                React.createElement("a", { href: "#", className: "active" }, "3"),
+                React.createElement("a", { href: "#" }, "4"),
+                React.createElement("a", { href: "#" }, "5"),
+                React.createElement("a", { href: "#" }, "6"),
+                React.createElement("a", { href: "#" }, "»"),
             )
         }
     }
