@@ -303,6 +303,12 @@
 
         addAnimal(event) {
             var aN = document.getElementById("aName").value;
+            if (!aN) {
+                alert("Please enter an animal name");
+                document.getElementById("aName").focus();
+                event.preventDefault();
+                return;
+            }
             var aU = document.getElementById("aUrl").value;
             var aD = document.getElementById("aDesc").value;
             var newState = Object.assign({}, this.state);
