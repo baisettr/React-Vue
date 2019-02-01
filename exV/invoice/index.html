@@ -1,0 +1,36 @@
+<html>
+
+<body>
+    <div id="app">
+        <input v-model="p.firstName" placeholder="First Name">
+        <p>Message is: {{ p.firstName }}</p>
+        <input v-model="p.lastName" placeholder="Last Name">
+        <p>Message is: {{ p.lastName }}</p>
+        <invoice-list v-bind:item="item"></invoice-list>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        Vue.component('invoice-list', {
+            props: ['item'],
+            template: `<input placeholder="Product Name">\<input placeholder="Product Price">\<button v-on:click="addItem">Add Item</button>`,
+            computed: {
+                totalPrice: function () {
+                    return `${this.person.fn} : ${this.person.ln}`;
+                },
+                greet: function () {
+                    return `Hello from ${this.person.fn}`;
+                }
+            },
+            methods: {
+                addItem: function () {
+                    this.$emit('add', this.add);
+                }
+            }
+        })
+        var app = new Vue({
+            el: '#app', data: { message: 'Hello Gin!', p: { firstName: "John", lastName: "Hopkins" } }
+        });
+    </script>
+</body>
+
+</html>
