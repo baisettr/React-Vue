@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart Example</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<style>
+    .divHome {
+        display: flex;
+        padding: 50px;
+    }
+
+    .divChildLeft {
+        left: 0;
+        margin: auto;
+    }
+
+    .divChildRight {
+        right: 0;
+        margin: 0 0 0 auto;
+    }
+
+    .listItems {
+        display: list-item;
+    }
+
+    .cartItems {
+        display: list-item;
+    }
+</style>
+
+<body>
+    <div id="root"> </div>
+    <script type="text/babel">
+        class Cart extends React.Component {
+            constructor(props){
+                super(props);
+                const listItems = [{id:'1', name:'item1'},{id:'2', name:'item2'},{id:'3', name:'item3'}]
+                this.state = {listItems:listItems, cartItems:{}}
+            }
+
+            addItem = (item,e) => {
+                const newItem = item;
+                let quantity = 0;
+                const cartItems = this.state.cartItems;
+                if (cartItems[newItem.id]){
+                    quantity = cartItems[newItem.id].quantity;
+                }
+                quantity = quantity + 1;
+                newItem.quantity = quantity;
+                cartItems[newItem.id] = newItem;
+                this.setState({cartItems})
+                
+                //const cartItems = [...this.state.cartItems, newItem];
+            }
+            removeItem = (item,e) => {
+                const removeItem = item;
+                const cartItems = this.state.cartItems;
+                if (cartItems[removeItem.id]){
+                    let quantity = cartItems[removeItem.id].quantity;
+                    quantity = quantity - 1; 
+                    if (quantity > 0) {
+                        cartItems[removeItem.id].quantity = quantity;
+                    } else {
+                        delete(cartItems[removeItem.id])
+                    }
+                    this.setState({cartItems})
+                }
+                //const cartItems = this.state.cartItems.filter((e)=> e.id !== removeItem.id);
+            }
+
+            CartItemsDiv = () => {
+                const cartItems = this.state.cartItems;
+                let cart = [];
+                for (let id in  cartItems){
+                    let item = cartItems[id];
+                    let itemDiv = <div key={id} className="cartItems"><h4>{item.name} quantity: {item.quantity}</h4></div>
+                    cart = [...cart, itemDiv];
+                }
+                return cart;
+            }
+            render(){
+                return (
+                    <div className="divHome">
+                        <div className="divChildLeft">
+                            <h1>Shopping Items</h1>
+                            <div>
+                                {this.state.listItems.map((item)=>{
+                                    return(
+                                        <div key={item.id} className="listItems">
+                                            <h4>{item.name}</h4>
+                                            <button onClick={this.addItem.bind(this,item)}>Add</button>
+                                            <button onClick={this.removeItem.bind(this,item)}>Remove</button>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div className="divChildRight">
+                            <h1>Shopping Cart</h1>
+                            <div><this.CartItemsDiv/></div>
+                        </div>
+                    </div>
+                );
+            };
+        };
+
+        const reactRoot = document.getElementById('root');
+        ReactDOM.render(<Cart/>, reactRoot);
+    </script>
+</body>
+
+</html>
