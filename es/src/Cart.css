@@ -1,0 +1,16 @@
+.Cart{
+    display: flex;
+    padding: 50px;
+}
+
+.class-items{
+    left: 0;
+    margin:0 auto
+}
+.cart-items{
+    right:0;
+    margin: 0 0 0 auto
+}
+.list-items{
+    display: list-item;
+}
