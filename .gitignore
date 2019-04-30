@@ -63,3 +63,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+*.http
+chichat/test
+decorators
+decorators/AlgoCasts
+
