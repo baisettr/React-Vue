@@ -16,22 +16,28 @@ const test1 = async () => {
     console.log(x1, x2, x3);
 }
 
-/* test().then((mess) => {
+
+(async function () {
+    const res = await test();
+    console.log(res);
+})()
+
+test().then((mess) => {
     console.log(mess);
 }).catch((err) => {
     console.log(err);
-}); */
-//test1();
+});
+test1();
 
 
-async function multiply(a, b) {
+/* async function multiply(a, b) {
     return a * b;
 }
 async function foo() {
     const result = await multiply(2, 5);
     return result;
 }
-/* 
+
 foo().then((mess) => {
     console.log(mess);
 }).catch((err) => {
@@ -52,10 +58,10 @@ foo().then((mess) => {
 })(); */
 
 
-let promises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e) => { return Promise.resolve(e) })
+/* let promises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((e) => { return Promise.resolve(e) })
 
 let res = Promise.all(promises);
 
 res.then((e) => {
     console.log(e);
-});
+}); */
